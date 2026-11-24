@@ -2,7 +2,7 @@ package com.netballmanager.netballmanager.controller;
 
 import com.netballmanager.netballmanager.dto.TeamRequest;
 import com.netballmanager.netballmanager.dto.TeamResponse;
-import com.netballmanager.netballmanager.entity.UserRole;
+import com.netballmanager.netballmanager.domain.UserRole;
 import com.netballmanager.netballmanager.service.CurrentUserService;
 import com.netballmanager.netballmanager.service.TeamService;
 import jakarta.validation.Valid;

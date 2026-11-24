@@ -1,10 +1,11 @@
 package com.netballmanager.netballmanager.service;
 
+import com.netballmanager.netballmanager.factory.DomainFactory;
 import com.netballmanager.netballmanager.dto.StatisticsRequest;
 import com.netballmanager.netballmanager.dto.StatisticsResponse;
-import com.netballmanager.netballmanager.entity.GameMatch;
-import com.netballmanager.netballmanager.entity.MatchStatistics;
-import com.netballmanager.netballmanager.entity.Player;
+import com.netballmanager.netballmanager.domain.GameMatch;
+import com.netballmanager.netballmanager.domain.MatchStatistics;
+import com.netballmanager.netballmanager.domain.Player;
 import com.netballmanager.netballmanager.exception.BadRequestException;
 import com.netballmanager.netballmanager.repository.MatchStatisticsRepository;
 import java.util.List;
@@ -37,7 +38,7 @@ public class StatisticsService {
         if (statistics.findByMatchIdAndPlayerId(matchId, player.getId()).isPresent()) {
             throw new BadRequestException("Statistics for this player and match have already been recorded");
         }
-        MatchStatistics result = statistics.save(new MatchStatistics(match, player, request.goalsScored(),
+        MatchStatistics result = statistics.save(DomainFactory.createStatistics(match, player, request.goalsScored(),
                 request.goalAttempts(), request.assists(), request.interceptions(), request.deflections(),
                 request.rebounds(), request.turnovers(), request.penalties(), request.minutesPlayed()));
         return toResponse(result);

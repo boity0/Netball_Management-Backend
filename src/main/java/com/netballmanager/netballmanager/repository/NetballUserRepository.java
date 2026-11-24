@@ -1,6 +1,6 @@
 package com.netballmanager.netballmanager.repository;
 
-import com.netballmanager.netballmanager.entity.NetballUser;
+import com.netballmanager.netballmanager.domain.NetballUser;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

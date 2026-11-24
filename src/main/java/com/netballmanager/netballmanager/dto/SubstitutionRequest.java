@@ -1,6 +1,6 @@
 package com.netballmanager.netballmanager.dto;
 
-import com.netballmanager.netballmanager.entity.Position;
+import com.netballmanager.netballmanager.domain.Position;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;

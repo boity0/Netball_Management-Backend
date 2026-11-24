@@ -1,8 +1,9 @@
 package com.netballmanager.netballmanager.service;
 
+import com.netballmanager.netballmanager.factory.DomainFactory;
 import com.netballmanager.netballmanager.dto.TrainingRequest;
 import com.netballmanager.netballmanager.dto.TrainingResponse;
-import com.netballmanager.netballmanager.entity.TrainingSession;
+import com.netballmanager.netballmanager.domain.TrainingSession;
 import com.netballmanager.netballmanager.repository.TrainingSessionRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class TrainingService {
     }
 
     public TrainingResponse create(Long teamId, TrainingRequest request) {
-        return toResponse(sessions.save(new TrainingSession(teams.require(teamId), request.title().trim(),
+        return toResponse(sessions.save(DomainFactory.createTraining(teams.require(teamId), request.title().trim(),
                 request.venue().trim(), request.startsAt())));
     }
 

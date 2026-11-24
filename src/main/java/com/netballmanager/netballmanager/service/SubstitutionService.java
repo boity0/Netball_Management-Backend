@@ -1,15 +1,16 @@
 package com.netballmanager.netballmanager.service;
 
+import com.netballmanager.netballmanager.factory.DomainFactory;
 import com.netballmanager.netballmanager.dto.SubstitutionRequest;
 import com.netballmanager.netballmanager.dto.SubstitutionResponse;
-import com.netballmanager.netballmanager.entity.AvailabilityStatus;
-import com.netballmanager.netballmanager.entity.GameMatch;
-import com.netballmanager.netballmanager.entity.LineupSelection;
-import com.netballmanager.netballmanager.entity.MatchLineup;
-import com.netballmanager.netballmanager.entity.MatchStatus;
-import com.netballmanager.netballmanager.entity.Player;
-import com.netballmanager.netballmanager.entity.PlayerStatus;
-import com.netballmanager.netballmanager.entity.Substitution;
+import com.netballmanager.netballmanager.domain.AvailabilityStatus;
+import com.netballmanager.netballmanager.domain.GameMatch;
+import com.netballmanager.netballmanager.domain.LineupSelection;
+import com.netballmanager.netballmanager.domain.MatchLineup;
+import com.netballmanager.netballmanager.domain.MatchStatus;
+import com.netballmanager.netballmanager.domain.Player;
+import com.netballmanager.netballmanager.domain.PlayerStatus;
+import com.netballmanager.netballmanager.domain.Substitution;
 import com.netballmanager.netballmanager.exception.BadRequestException;
 import com.netballmanager.netballmanager.exception.NotFoundException;
 import com.netballmanager.netballmanager.repository.MatchLineupRepository;
@@ -72,7 +73,7 @@ public class SubstitutionService {
         lineup.getSelections().stream().filter(selection -> selection.isStarting()
                         && selection != incoming && selection.getPosition() == request.position())
                 .forEach(selection -> selection.setStarting(false));
-        return toResponse(substitutions.save(new Substitution(match, outgoing.getPlayer(), in,
+        return toResponse(substitutions.save(DomainFactory.createSubstitution(match, outgoing.getPlayer(), in,
                 outgoing.getPosition(), request.position(), request.period())));
     }
 

@@ -1,7 +1,7 @@
 package com.netballmanager.netballmanager.repository;
 
-import com.netballmanager.netballmanager.entity.Player;
-import com.netballmanager.netballmanager.entity.PlayerStatus;
+import com.netballmanager.netballmanager.domain.Player;
+import com.netballmanager.netballmanager.domain.PlayerStatus;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

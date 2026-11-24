@@ -1,10 +1,11 @@
 package com.netballmanager.netballmanager.service;
 
+import com.netballmanager.netballmanager.factory.DomainFactory;
 import com.netballmanager.netballmanager.dto.PlayerRequest;
 import com.netballmanager.netballmanager.dto.PlayerResponse;
-import com.netballmanager.netballmanager.entity.Player;
-import com.netballmanager.netballmanager.entity.PlayerStatus;
-import com.netballmanager.netballmanager.entity.Team;
+import com.netballmanager.netballmanager.domain.Player;
+import com.netballmanager.netballmanager.domain.PlayerStatus;
+import com.netballmanager.netballmanager.domain.Team;
 import com.netballmanager.netballmanager.exception.ConflictException;
 import com.netballmanager.netballmanager.exception.NotFoundException;
 import com.netballmanager.netballmanager.repository.NetballUserRepository;
@@ -37,7 +38,7 @@ public class PlayerService {
         if (players.existsByEmailIgnoreCase(request.email())) {
             throw new ConflictException("A player with that email already exists");
         }
-        Player player = players.save(new Player(request.firstName().trim(), request.lastName().trim(),
+        Player player = players.save(DomainFactory.createPlayer(request.firstName().trim(), request.lastName().trim(),
                 request.email().trim().toLowerCase(), request.phoneNumber(), request.jerseyNumber(),
                 request.preferredPositions(), team));
         users.findByEmailIgnoreCase(player.getEmail()).ifPresent(user -> {

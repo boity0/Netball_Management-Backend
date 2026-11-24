@@ -1,4 +1,4 @@
-package com.netballmanager.netballmanager.entity;
+package com.netballmanager.netballmanager.domain;
 
 public enum PlayerStatus {
     ACTIVE, INACTIVE

@@ -1,8 +1,9 @@
 package com.netballmanager.netballmanager.service;
 
+import com.netballmanager.netballmanager.factory.DomainFactory;
 import com.netballmanager.netballmanager.dto.TeamRequest;
 import com.netballmanager.netballmanager.dto.TeamResponse;
-import com.netballmanager.netballmanager.entity.Team;
+import com.netballmanager.netballmanager.domain.Team;
 import com.netballmanager.netballmanager.exception.ConflictException;
 import com.netballmanager.netballmanager.exception.NotFoundException;
 import com.netballmanager.netballmanager.repository.TeamRepository;
@@ -23,7 +24,7 @@ public class TeamService {
         if (teams.existsByNameIgnoreCase(request.name().trim())) {
             throw new ConflictException("A team with that name already exists");
         }
-        return toResponse(teams.save(new Team(request.name().trim(), request.description())));
+        return toResponse(teams.save(DomainFactory.createTeam(request.name().trim(), request.description())));
     }
 
     @Transactional(readOnly = true)

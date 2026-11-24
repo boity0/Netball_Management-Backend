@@ -1,6 +1,6 @@
 package com.netballmanager.netballmanager.dto;
 
-import com.netballmanager.netballmanager.entity.Position;
+import com.netballmanager.netballmanager.domain.Position;
 import java.time.LocalDateTime;
 
 public record SubstitutionResponse(Long id, Long matchId, Long playerOutId, String playerOutName,

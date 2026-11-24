@@ -1,6 +1,6 @@
 package com.netballmanager.netballmanager.repository;
 
-import com.netballmanager.netballmanager.entity.Team;
+import com.netballmanager.netballmanager.domain.Team;
 import jakarta.persistence.LockModeType;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
