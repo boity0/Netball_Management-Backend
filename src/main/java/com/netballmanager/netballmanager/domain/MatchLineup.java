@@ -1,4 +1,4 @@
-package com.netballmanager.netballmanager.entity;
+package com.netballmanager.netballmanager.domain;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

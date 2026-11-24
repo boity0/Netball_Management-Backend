@@ -1,7 +1,7 @@
 package com.netballmanager.netballmanager.security;
 
 import com.netballmanager.netballmanager.dto.TokenResponse;
-import com.netballmanager.netballmanager.entity.NetballUser;
+import com.netballmanager.netballmanager.domain.NetballUser;
 import java.time.Duration;
 import java.time.Instant;
 import org.springframework.beans.factory.annotation.Value;

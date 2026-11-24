@@ -1,14 +1,15 @@
 package com.netballmanager.netballmanager.service;
 
+import com.netballmanager.netballmanager.factory.DomainFactory;
 import com.netballmanager.netballmanager.dto.AvailabilityRequest;
 import com.netballmanager.netballmanager.dto.AvailabilitySummary;
 import com.netballmanager.netballmanager.dto.PlayerResponse;
-import com.netballmanager.netballmanager.entity.AvailabilityStatus;
-import com.netballmanager.netballmanager.entity.GameMatch;
-import com.netballmanager.netballmanager.entity.MatchStatus;
-import com.netballmanager.netballmanager.entity.Player;
-import com.netballmanager.netballmanager.entity.PlayerAvailability;
-import com.netballmanager.netballmanager.entity.PlayerStatus;
+import com.netballmanager.netballmanager.domain.AvailabilityStatus;
+import com.netballmanager.netballmanager.domain.GameMatch;
+import com.netballmanager.netballmanager.domain.MatchStatus;
+import com.netballmanager.netballmanager.domain.Player;
+import com.netballmanager.netballmanager.domain.PlayerAvailability;
+import com.netballmanager.netballmanager.domain.PlayerStatus;
 import com.netballmanager.netballmanager.exception.BadRequestException;
 import com.netballmanager.netballmanager.exception.NotFoundException;
 import com.netballmanager.netballmanager.repository.PlayerAvailabilityRepository;
@@ -49,7 +50,7 @@ public class AvailabilityService {
             throw new BadRequestException("Inactive players cannot update match availability");
         }
         PlayerAvailability response = availability.findByMatchIdAndPlayerId(matchId, player.getId())
-                .orElseGet(() -> new PlayerAvailability(match, player, request.status()));
+                .orElseGet(() -> DomainFactory.createAvailability(match, player, request.status()));
         response.setStatus(request.status());
         availability.save(response);
         return summary(matchId);

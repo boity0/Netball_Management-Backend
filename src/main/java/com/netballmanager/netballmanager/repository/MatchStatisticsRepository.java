@@ -1,6 +1,6 @@
 package com.netballmanager.netballmanager.repository;
 
-import com.netballmanager.netballmanager.entity.MatchStatistics;
+import com.netballmanager.netballmanager.domain.MatchStatistics;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

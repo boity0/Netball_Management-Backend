@@ -1,10 +1,11 @@
 package com.netballmanager.netballmanager.service;
 
+import com.netballmanager.netballmanager.factory.DomainFactory;
 import com.netballmanager.netballmanager.dto.LoginRequest;
 import com.netballmanager.netballmanager.dto.RegisterRequest;
 import com.netballmanager.netballmanager.dto.TokenResponse;
-import com.netballmanager.netballmanager.entity.NetballUser;
-import com.netballmanager.netballmanager.entity.UserRole;
+import com.netballmanager.netballmanager.domain.NetballUser;
+import com.netballmanager.netballmanager.domain.UserRole;
 import com.netballmanager.netballmanager.exception.ConflictException;
 import com.netballmanager.netballmanager.repository.NetballUserRepository;
 import com.netballmanager.netballmanager.repository.PlayerRepository;
@@ -38,7 +39,7 @@ public class AuthService {
         if (users.existsByEmailIgnoreCase(email)) {
             throw new ConflictException("An account with that email already exists");
         }
-        NetballUser user = new NetballUser(email, passwordEncoder.encode(request.password()), UserRole.PLAYER);
+        NetballUser user = DomainFactory.createUser(email, passwordEncoder.encode(request.password()), UserRole.PLAYER);
         players.findByEmailIgnoreCase(email).ifPresent(user::setPlayer);
         users.save(user);
         return login(new LoginRequest(email, request.password()));

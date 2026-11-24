@@ -1,6 +1,6 @@
 package com.netballmanager.netballmanager.dto;
 
-import com.netballmanager.netballmanager.entity.AvailabilityStatus;
+import com.netballmanager.netballmanager.domain.AvailabilityStatus;
 import java.util.List;
 import java.util.Map;
 

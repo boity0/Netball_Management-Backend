@@ -1,7 +1,7 @@
 package com.netballmanager.netballmanager.config;
 
-import com.netballmanager.netballmanager.entity.NetballUser;
-import com.netballmanager.netballmanager.entity.UserRole;
+import com.netballmanager.netballmanager.factory.DomainFactory;
+import com.netballmanager.netballmanager.domain.UserRole;
 import com.netballmanager.netballmanager.repository.NetballUserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -24,7 +24,7 @@ public class BootstrapCoach {
                         "Set both BOOTSTRAP_COACH_EMAIL and BOOTSTRAP_COACH_PASSWORD (at least 10 characters)");
             }
             if (!users.existsByEmailIgnoreCase(email)) {
-                users.save(new NetballUser(email.trim().toLowerCase(), encoder.encode(password), UserRole.COACH));
+                users.save(DomainFactory.createUser(email.trim().toLowerCase(), encoder.encode(password), UserRole.COACH));
             }
         };
     }

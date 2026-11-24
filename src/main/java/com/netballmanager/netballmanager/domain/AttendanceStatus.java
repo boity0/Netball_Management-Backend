@@ -1,4 +1,4 @@
-package com.netballmanager.netballmanager.entity;
+package com.netballmanager.netballmanager.domain;
 
 public enum AttendanceStatus {
     PRESENT, ABSENT, LATE, EXCUSED

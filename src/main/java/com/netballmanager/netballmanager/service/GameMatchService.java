@@ -1,9 +1,10 @@
 package com.netballmanager.netballmanager.service;
 
+import com.netballmanager.netballmanager.factory.DomainFactory;
 import com.netballmanager.netballmanager.dto.MatchRequest;
 import com.netballmanager.netballmanager.dto.MatchResponse;
-import com.netballmanager.netballmanager.entity.GameMatch;
-import com.netballmanager.netballmanager.entity.MatchStatus;
+import com.netballmanager.netballmanager.domain.GameMatch;
+import com.netballmanager.netballmanager.domain.MatchStatus;
 import com.netballmanager.netballmanager.exception.BadRequestException;
 import com.netballmanager.netballmanager.exception.NotFoundException;
 import com.netballmanager.netballmanager.repository.GameMatchRepository;
@@ -25,7 +26,7 @@ public class GameMatchService {
 
     public MatchResponse create(Long teamId, MatchRequest request) {
         validateFuture(request.matchDateTime());
-        return toResponse(matches.save(new GameMatch(teams.require(teamId), request.opponentName().trim(),
+        return toResponse(matches.save(DomainFactory.createMatch(teams.require(teamId), request.opponentName().trim(),
                 request.venue().trim(), request.matchDateTime(), request.venueType())));
     }
 

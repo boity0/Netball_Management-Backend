@@ -1,20 +1,21 @@
 package com.netballmanager.netballmanager.service;
 
+import com.netballmanager.netballmanager.factory.DomainFactory;
 import com.netballmanager.netballmanager.dto.LineupPlayerResponse;
 import com.netballmanager.netballmanager.dto.LineupRequest;
 import com.netballmanager.netballmanager.dto.LineupResponse;
 import com.netballmanager.netballmanager.dto.LineupSelectionRequest;
-import com.netballmanager.netballmanager.entity.Attendance;
-import com.netballmanager.netballmanager.entity.AttendanceStatus;
-import com.netballmanager.netballmanager.entity.AvailabilityStatus;
-import com.netballmanager.netballmanager.entity.GameMatch;
-import com.netballmanager.netballmanager.entity.LineupSelection;
-import com.netballmanager.netballmanager.entity.MatchLineup;
-import com.netballmanager.netballmanager.entity.MatchStatus;
-import com.netballmanager.netballmanager.entity.MatchStatistics;
-import com.netballmanager.netballmanager.entity.Player;
-import com.netballmanager.netballmanager.entity.PlayerStatus;
-import com.netballmanager.netballmanager.entity.Position;
+import com.netballmanager.netballmanager.domain.Attendance;
+import com.netballmanager.netballmanager.domain.AttendanceStatus;
+import com.netballmanager.netballmanager.domain.AvailabilityStatus;
+import com.netballmanager.netballmanager.domain.GameMatch;
+import com.netballmanager.netballmanager.domain.LineupSelection;
+import com.netballmanager.netballmanager.domain.MatchLineup;
+import com.netballmanager.netballmanager.domain.MatchStatus;
+import com.netballmanager.netballmanager.domain.MatchStatistics;
+import com.netballmanager.netballmanager.domain.Player;
+import com.netballmanager.netballmanager.domain.PlayerStatus;
+import com.netballmanager.netballmanager.domain.Position;
 import com.netballmanager.netballmanager.exception.BadRequestException;
 import com.netballmanager.netballmanager.exception.NotFoundException;
 import com.netballmanager.netballmanager.repository.AttendanceRepository;
@@ -86,7 +87,7 @@ public class LineupService {
             newSelections.add(validateSelection(match, selection, selectedPlayerIds, false));
         }
 
-        MatchLineup lineup = lineups.findByMatchId(matchId).orElseGet(() -> new MatchLineup(match));
+        MatchLineup lineup = lineups.findByMatchId(matchId).orElseGet(() -> DomainFactory.createMatchLineup(match));
         lineup.clearSelections();
         lineups.saveAndFlush(lineup);
         lineup.replaceSelections(newSelections);
@@ -205,7 +206,7 @@ public class LineupService {
                 .map(response -> response.getStatus() == AvailabilityStatus.UNAVAILABLE).orElse(false)) {
             throw new BadRequestException("Unavailable players cannot be selected");
         }
-        return new LineupSelection(player, request.position(), starting);
+        return DomainFactory.createLineupSelection(player, request.position(), starting);
     }
 
     private GameMatch requireMatch(Long matchId) {

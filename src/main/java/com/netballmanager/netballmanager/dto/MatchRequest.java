@@ -1,6 +1,6 @@
 package com.netballmanager.netballmanager.dto;
 
-import com.netballmanager.netballmanager.entity.VenueType;
+import com.netballmanager.netballmanager.domain.VenueType;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

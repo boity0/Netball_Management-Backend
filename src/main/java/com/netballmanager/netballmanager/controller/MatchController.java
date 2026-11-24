@@ -3,7 +3,7 @@ package com.netballmanager.netballmanager.controller;
 import com.netballmanager.netballmanager.dto.MatchRequest;
 import com.netballmanager.netballmanager.dto.MatchResponse;
 import com.netballmanager.netballmanager.dto.MatchResultRequest;
-import com.netballmanager.netballmanager.entity.MatchStatus;
+import com.netballmanager.netballmanager.domain.MatchStatus;
 import com.netballmanager.netballmanager.service.GameMatchService;
 import com.netballmanager.netballmanager.service.CurrentUserService;
 import jakarta.validation.Valid;

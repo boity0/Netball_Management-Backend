@@ -1,13 +1,14 @@
 package com.netballmanager.netballmanager.service;
 
+import com.netballmanager.netballmanager.factory.DomainFactory;
 import com.netballmanager.netballmanager.dto.AttendanceRequest;
 import com.netballmanager.netballmanager.dto.AttendanceResponse;
 import com.netballmanager.netballmanager.dto.PlayerAttendanceSummary;
-import com.netballmanager.netballmanager.entity.Attendance;
-import com.netballmanager.netballmanager.entity.AttendanceStatus;
-import com.netballmanager.netballmanager.entity.GameMatch;
-import com.netballmanager.netballmanager.entity.Player;
-import com.netballmanager.netballmanager.entity.TrainingSession;
+import com.netballmanager.netballmanager.domain.Attendance;
+import com.netballmanager.netballmanager.domain.AttendanceStatus;
+import com.netballmanager.netballmanager.domain.GameMatch;
+import com.netballmanager.netballmanager.domain.Player;
+import com.netballmanager.netballmanager.domain.TrainingSession;
 import com.netballmanager.netballmanager.exception.BadRequestException;
 import com.netballmanager.netballmanager.repository.AttendanceRepository;
 import java.util.List;
@@ -35,7 +36,7 @@ public class AttendanceService {
         Player player = players.require(request.playerId());
         validateTeam(player, match.getTeam().getId());
         Attendance record = attendance.findByMatchIdAndPlayerId(matchId, player.getId())
-                .orElseGet(() -> new Attendance(player, match, null, request.status()));
+                .orElseGet(() -> DomainFactory.createMatchAttendance(player, match, request.status()));
         record.setStatus(request.status());
         return toResponse(attendance.save(record));
     }
@@ -45,7 +46,7 @@ public class AttendanceService {
         Player player = players.require(request.playerId());
         validateTeam(player, session.getTeam().getId());
         Attendance record = attendance.findByTrainingIdAndPlayerId(trainingId, player.getId())
-                .orElseGet(() -> new Attendance(player, null, session, request.status()));
+                .orElseGet(() -> DomainFactory.createTrainingAttendance(player, session, request.status()));
         record.setStatus(request.status());
         return toResponse(attendance.save(record));
     }

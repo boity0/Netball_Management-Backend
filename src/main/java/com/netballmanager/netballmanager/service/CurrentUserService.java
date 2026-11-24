@@ -1,7 +1,7 @@
 package com.netballmanager.netballmanager.service;
 
-import com.netballmanager.netballmanager.entity.NetballUser;
-import com.netballmanager.netballmanager.entity.UserRole;
+import com.netballmanager.netballmanager.domain.NetballUser;
+import com.netballmanager.netballmanager.domain.UserRole;
 import com.netballmanager.netballmanager.exception.BadRequestException;
 import com.netballmanager.netballmanager.exception.NotFoundException;
 import com.netballmanager.netballmanager.repository.NetballUserRepository;
